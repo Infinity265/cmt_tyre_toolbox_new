@@ -1,0 +1,307 @@
+[MDI_HEADER]
+FILE_TYPE                    = 'tir'             
+FILE_VERSION                 = 3                 
+FILE_FORMAT                  = 'ASCII'           
+$-----------------------------------------------------------------units
+[UNITS]
+LENGTH                       = 'meter'           
+FORCE                        = 'newton'          
+ANGLE                        = 'radians'         
+MASS                         = 'kg'              
+TIME                         = 'second'          
+$-----------------------------------------------------------------model
+[MODEL]
+FITTYP                       = 61                
+TYRESIDE                     = 'LEFT'            
+LONGVL                       = 10                
+VXLOW                        = 1                 
+ROAD_INCREMENT               =                   
+ROAD_DIRECTION               =                   
+$-------------------------------------------------------------dimension
+[DIMENSION]
+UNLOADED_RADIUS              = 0.2032            
+WIDTH                        =                   
+ASPECT_RATIO                 =                   
+RIM_RADIUS                   =                   
+RIM_WIDTH                    =                   
+$--------------------------------------------------operating conditions
+[OPERATING_CONDITIONS]
+INFLPRES                     =                   
+NOMPRES                      = 96500             
+$---------------------------------------------------------------inertia
+[INERTIA]
+MASS                         =                   
+IXX                          =                   
+IYY                          =                   
+BELT_MASS                    =                   
+BELT_IXX                     =                   
+BELT_IYY                     =                   
+GRAVITY                      =                   
+$--------------------------------------------------------------vertical
+[VERTICAL]
+FNOMIN                       = 1545              
+VERTICAL_STIFFNESS           =                   
+VERTICAL_DAMPING             =                   
+MC_CONTOUR_A                 =                   
+MC_CONTOUR_B                 =                   
+BREFF                        =                   
+DREFF                        =                   
+FREFF                        =                   
+Q_RE0                        =                   
+Q_V1                         =                   
+Q_V2                         =                   
+Q_FZ2                        =                   
+Q_FCX                        =                   
+Q_FCY                        =                   
+Q_CAM                        =                   
+PFZ1                         =                   
+Q_FCY2                       =                   
+Q_CAM1                       =                   
+Q_CAM2                       =                   
+Q_CAM3                       =                   
+Q_FYS1                       =                   
+Q_FYS2                       =                   
+Q_FYS3                       =                   
+BOTTOM_OFFST                 =                   
+BOTTOM_STIFF                 =                   
+$------------------------------------------------------------structural
+[STRUCTURAL]
+LONGITUDINAL_STIFFNESS       =                   
+LATERAL_STIFFNESS            =                   
+YAW_STIFFNESS                =                   
+FREQ_LONG                    =                   
+FREQ_LAT                     =                   
+FREQ_YAW                     =                   
+FREQ_WINDUP                  =                   
+DAMP_LONG                    =                   
+DAMP_LAT                     =                   
+DAMP_YAW                     =                   
+DAMP_WINDUP                  =                   
+DAMP_RESIDUAL                =                   
+DAMP_VLOW                    =                   
+Q_BVX                        =                   
+Q_BVT                        =                   
+PCFX1                        =                   
+PCFX2                        =                   
+PCFX3                        =                   
+PCFY1                        =                   
+PCFY2                        =                   
+PCFY3                        =                   
+PCMZ1                        =                   
+$---------------------------------------------------------contact patch
+[CONTACT_PATCH]
+Q_RA1                        =                   
+Q_RA2                        =                   
+Q_RB1                        =                   
+Q_RB2                        =                   
+ELLIPS_SHIFT                 =                   
+ELLIPS_LENGTH                =                   
+ELLIPS_HEIGHT                =                   
+ELLIPS_ORDER                 =                   
+ELLIPS_MAX_STEP              =                   
+ELLIPS_NWIDTH                =                   
+ELLIPS_NLENGTH               =                   
+ENV_C1                       =                   
+ENV_C2                       =                   
+$----------------------------------------------inflation pressure range
+[INFLATION_PRESSURE_RANGE]
+PRESMIN                      =                   
+PRESMAX                      =                   
+$--------------------------------------------------vertical force range
+[VERTICAL_FORCE_RANGE]
+FZMIN                        =                   
+FZMAX                        =                   
+$-------------------------------------------------------long slip range
+[LONG_SLIP_RANGE]
+KPUMIN                       =                   
+KPUMAX                       =                   
+$------------------------------------------------------slip angle range
+[SLIP_ANGLE_RANGE]
+ALPMIN                       =                   
+ALPMAX                       =                   
+$-----------------------------------------------inclination angle range
+[INCLINATION_ANGLE_RANGE]
+CAMMIN                       =                   
+CAMMAX                       =                   
+$--------------------------------------------------scaling coefficients
+[SCALING_COEFFICIENTS]
+LFZO                         = 1                 
+LCX                          = 1                 
+LMUX                         = 1                 
+LEX                          = 1                 
+LKX                          = 1                 
+LHX                          = 1                 
+LVX                          = 1                 
+LCY                          = 1                 
+LMUY                         = 1                 
+LEY                          = 1                 
+LKY                          = 1                 
+LHY                          = 1                 
+LVY                          = 1                 
+LTR                          = 1                 
+LRES                         = 1                 
+LXAL                         = 1                 
+LYKA                         = 1                 
+LVYKA                        = 1                 
+LS                           = 1                 
+LKYC                         = 1                 
+LKZC                         = 1                 
+LVMX                         = 1                 
+LMX                          = 1                 
+LMY                          = 1                 
+LMP                          = 1                 
+$---------------------------------------------longitudinal coefficients
+[LONGITUDINAL_COEFFICIENTS]
+PCX1                         = 1.5               
+PDX1                         = 1.7364            
+PDX2                         = -0.083691         
+PDX3                         = 2.969e-06         
+PEX1                         = -6.5789e-08       
+PEX2                         = -1.423            
+PEX3                         = -0.6              
+PEX4                         = -0.25392          
+PKX1                         = 20.4932           
+PKX2                         = -0.17168          
+PKX3                         = -0.31629          
+PHX1                         = -0.0021489        
+PHX2                         = -5.0661e-06       
+PVX1                         = 0.1               
+PVX2                         = 0.072437          
+PPX1                         = -1.4202           
+PPX2                         = -1.3057           
+PPX3                         = -1.1771           
+PPX4                         = -2.2001           
+RBX1                         = 7.1344            
+RBX2                         = 9.1735            
+RBX3                         = 39.6624           
+RCX1                         = 0.97352           
+REX1                         = -3.1544           
+REX2                         = 1                 
+RHX1                         = 0.016365          
+$----------------------------------------------overturning coefficients
+[OVERTURNING_COEFFICIENTS]
+QSX1                         = 0.020735          
+QSX2                         = 1.808             
+QSX3                         = 0.11014           
+QSX4                         = 0.046626          
+QSX5                         = 0                 
+QSX6                         = 0                 
+QSX7                         = 0.046639          
+QSX8                         = 0                 
+QSX9                         = 0                 
+QSX10                        = 0                 
+QSX11                        = 0                 
+QSX12                        = 0                 
+QSX13                        = 0                 
+QSX14                        = 0                 
+PPMX1                        = 0.50643           
+$--------------------------------------------------lateral coefficients
+[LATERAL_COEFFICIENTS]
+PCY1                         = 1.5               
+PDY1                         = 1.9767            
+PDY2                         = -0.20309          
+PDY3                         = -1.7736           
+PEY1                         = 0.67283           
+PEY2                         = -0.097622         
+PEY3                         = 0.14899           
+PEY4                         = -0.61711          
+PEY5                         = 71.5487           
+PKY1                         = -23.4514          
+PKY2                         = 1.5913            
+PKY3                         = 0.013977          
+PKY4                         = 2                 
+PKY5                         = 53.9642           
+PKY6                         = -1.5924           
+PKY7                         = -0.24019          
+PHY1                         = -5.8432e-05       
+PHY2                         = -5.5608e-05       
+PVY1                         = 0.024304          
+PVY2                         = -0.039511         
+PVY3                         = -0.64194          
+PVY4                         = -1.4304           
+PPY1                         = 0.5255            
+PPY2                         = 1.1783            
+PPY3                         = -0.59578          
+PPY4                         = -0.62256          
+PPY5                         = -1.0681           
+RBY1                         = 39.7595           
+RBY2                         = 8.2377            
+RBY3                         = -0.034106         
+RBY4                         = 89.9979           
+RCY1                         = 0.84333           
+REY1                         = 0.66922           
+REY2                         = 0.29225           
+RHY1                         = 0.0073968         
+RHY2                         = 0.0078666         
+RVY1                         = 0                 
+RVY2                         = 0                 
+RVY3                         = 0                 
+RVY4                         = 0                 
+RVY5                         = 0                 
+RVY6                         = 0                 
+$--------------------------------------------------rolling coefficients
+[ROLLING_COEFFICIENTS]
+QSY1                         = 0                 
+QSY2                         = 0                 
+QSY3                         = 0                 
+QSY4                         = 0                 
+QSY5                         = 0                 
+QSY6                         = 0                 
+QSY7                         = 0                 
+QSY8                         = 0                 
+$-------------------------------------------------aligning coefficients
+[ALIGNING_COEFFICIENTS]
+QBZ1                         = 3.1384            
+QBZ2                         = -24.6874          
+QBZ3                         = 11.116            
+QBZ4                         = 60.245            
+QBZ5                         = 60.245            
+QBZ9                         = 58.4696           
+QBZ10                        = 2.5937            
+QCZ1                         = 0.00025894        
+QDZ1                         = 0.097606          
+QDZ2                         = -0.047128         
+QDZ3                         = 3.7272            
+QDZ4                         = -38.4417          
+QDZ6                         = -0.0011298        
+QDZ7                         = -0.0088363        
+QDZ8                         = -0.70641          
+QDZ9                         = 1.945             
+QDZ10                        = -6.542            
+QDZ11                        = -23.5857          
+QEZ1                         = -189.0627         
+QEZ2                         = -111.0211         
+QEZ3                         = 92.7076           
+QEZ4                         = -215.9866         
+QEZ5                         = -6.1945           
+QHZ1                         = -116.4023         
+QHZ2                         = -118.8125         
+QHZ3                         = 56.9879           
+QHZ4                         = -21.325           
+PPZ1                         = -3.8681           
+PPZ2                         = -3.7623           
+SSZ1                         = -0.040698         
+SSZ2                         = -0.10017          
+SSZ3                         = 0                 
+SSZ4                         = 0                 
+$-------------------------------------------------turnslip coefficients
+[TURNSLIP_COEFFICIENTS]
+PDXP1                        = 0                 
+PDXP2                        = 0                 
+PDXP3                        = 0                 
+PKYP1                        = 0                 
+PDYP1                        = 0                 
+PDYP2                        = 0                 
+PDYP3                        = 0                 
+PDYP4                        = 0                 
+PHYP1                        = 0                 
+PHYP2                        = 0                 
+PHYP3                        = 0                 
+PHYP4                        = 0                 
+PECP1                        = 0                 
+PECP2                        = 0                 
+QDTP1                        = 0                 
+QCRP1                        = 0                 
+QCRP2                        = 0                 
+QBRP1                        = 0                 
+QDRP1                        = 0                 
