@@ -3,7 +3,7 @@ clear
 
 
 % Select tyre for analysis
-ID = 27             %internal_tyre_ID used in excel file
+ID = 5             %internal_tyre_ID used in excel file
 
 % Options  1 == yes, 0 == no
 fit_model = 1; %Can turn off model fitting for trouble shooting 
