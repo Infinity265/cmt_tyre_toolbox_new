@@ -8,12 +8,10 @@ function run_curvefit_2(ID)
     %   tyre_model  : Saves .tir model with appropriate name
 
 % Select tyre for analysis
-ID = 5             %internal_tyre_ID used in excel file
+%ID = 5             %internal_tyre_ID used in excel file
 
 % Options  1 == yes, 0 == no
 fit_model = 1; %Can turn off model fitting for trouble shooting 
-
-
 
 % Read in tyre metadata
 [tyre_model_name, round, corner_no_1, corner_no_2, drive_no_1, drive_no_2, tyre_unloaded_radius] = read_tyre_from_metadata(ID)
@@ -25,24 +23,42 @@ parser = tydex.parsers.FSAETTC_SI_ISO_Mat();
     
 % Prepare measurements for fitting
 if round == 9
-    measurementsCornering = round_9_parser(data_folder, 'Cornering', corner_no_1, corner_no_2);
-    measurementsDriveBrake = round_9_parser(data_folder, 'DriveBrake', drive_no_1, drive_no_2);
+    if drive_no_1 == 'ND';
+        measurementsCornering = round_9_parser(data_folder, 'Cornering', corner_no_1, corner_no_2);
+    else
+        measurementsCornering = round_9_parser(data_folder, 'Cornering', corner_no_1, corner_no_2);
+        measurementsDriveBrake = round_9_parser(data_folder, 'DriveBrake', drive_no_1, drive_no_2);
+    end
 elseif round == 8
-    measurementsCornering = round_8_parser(data_folder, 'Cornering', corner_no_1, corner_no_2);
-    measurementsDriveBrake = round_8_parser(data_folder, 'DriveBrake', drive_no_1, drive_no_2);
+    if drive_no_1 == 'ND';
+        measurementsCornering = round_8_parser(data_folder, 'Cornering', corner_no_1, corner_no_2);
+    else
+        measurementsCornering = round_8_parser(data_folder, 'Cornering', corner_no_1, corner_no_2);
+        measurementsDriveBrake = round_8_parser(data_folder, 'DriveBrake', drive_no_1, drive_no_2);
+    end
 elseif round == 7
-    measurementsCornering = round_7_parser(data_folder, 'Cornering', corner_no_1, corner_no_2);
-    measurementsDriveBrake = round_7_parser(data_folder, 'DriveBrake', drive_no_1, drive_no_2);
+    if drive_no_1 == 'ND';
+        measurementsCornering = round_7_parser(data_folder, 'Cornering', corner_no_1, corner_no_2);
+    else
+        measurementsCornering = round_7_parser(data_folder, 'Cornering', corner_no_1, corner_no_2);
+        measurementsDriveBrake = round_7_parser(data_folder, 'DriveBrake', drive_no_1, drive_no_2);
+    end
 end
 
 % Downsample to speed up curve fitting 
-measurements = [measurementsCornering measurementsDriveBrake];
-% measurements = [measurementsCornering];
+if drive_no_1 == 'ND';
+    measurements = [measurementsCornering]; %When drive brake isn't available  
+else
+    measurements = [measurementsCornering measurementsDriveBrake];
+end
 measurementsDownsampled = measurements.downsample(20); % (dt = 0.01s --> 0.2s)
 
 % Select fitmodes
-fitmodes = {'Fx0','Fy0','Mz0','Fx','Fy','Mz','Mx'};
-%fitmodes = {'Fy0','Mz0'}; %Fitting when drive brake isn't available  
+if drive_no_1 == 'ND';
+    fitmodes = {'Fy0','Mz0'}; %Fitting when drive brake isn't available  
+else
+    fitmodes = {'Fx0','Fy0','Mz0','Fx','Fy','Mz','Mx'};
+end
 
 % Create tyre model
 tyre = MagicFormulaTyre();

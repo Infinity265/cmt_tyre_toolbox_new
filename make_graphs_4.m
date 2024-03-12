@@ -17,11 +17,9 @@ function make_graphs_4(ID, graph_options)
     %   corner_no_2   : No. of second cornering test
     %   drive_no_1    : No. of first drivebrake test
     %   drive_no_2    : No. of first drivebrake test
-
-    
     
     % Hardcode function input params
-    % ID = 16;
+    % ID = 6;
     % graph_options = [0,0,0,0];
     
     % Read model
