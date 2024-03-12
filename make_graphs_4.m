@@ -75,8 +75,8 @@ function make_graphs_4(ID, graph_options)
     SA_at_FY_max_with_LLT = rad2deg(SA(i));
     CS_LLT = -1 * (gradient(FY_LLT(:)) ./ gradient(SA(:)));
     CS_LLT_max = max(abs(CS_LLT));
-    
-    %TODO Load Sensitivity Calc to go here
+
+    FY
     
     % FYvsSA graphing
     if graphFYSA == 1   
