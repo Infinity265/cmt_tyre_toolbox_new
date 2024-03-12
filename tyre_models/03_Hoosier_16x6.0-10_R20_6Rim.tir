@@ -15,31 +15,114 @@ FITTYP                       = 61
 TYRESIDE                     = 'LEFT'            
 LONGVL                       = 10                
 VXLOW                        = 1                 
+ROAD_INCREMENT               =                   
+ROAD_DIRECTION               =                   
 $-------------------------------------------------------------dimension
 [DIMENSION]
-UNLOADED_RADIUS              = 0.4064            
+UNLOADED_RADIUS              = 0.2032            
+WIDTH                        =                   
+ASPECT_RATIO                 =                   
+RIM_RADIUS                   =                   
+RIM_WIDTH                    =                   
 $--------------------------------------------------operating conditions
 [OPERATING_CONDITIONS]
-NOMPRES                      = 100000            
+INFLPRES                     =                   
+NOMPRES                      = 96500             
 $---------------------------------------------------------------inertia
 [INERTIA]
+MASS                         =                   
+IXX                          =                   
+IYY                          =                   
+BELT_MASS                    =                   
+BELT_IXX                     =                   
+BELT_IYY                     =                   
+GRAVITY                      =                   
 $--------------------------------------------------------------vertical
 [VERTICAL]
-FNOMIN                       = 1500              
+FNOMIN                       = 1130              
+VERTICAL_STIFFNESS           =                   
+VERTICAL_DAMPING             =                   
+MC_CONTOUR_A                 =                   
+MC_CONTOUR_B                 =                   
+BREFF                        =                   
+DREFF                        =                   
+FREFF                        =                   
+Q_RE0                        =                   
+Q_V1                         =                   
+Q_V2                         =                   
+Q_FZ2                        =                   
+Q_FCX                        =                   
+Q_FCY                        =                   
+Q_CAM                        =                   
+PFZ1                         =                   
+Q_FCY2                       =                   
+Q_CAM1                       =                   
+Q_CAM2                       =                   
+Q_CAM3                       =                   
+Q_FYS1                       =                   
+Q_FYS2                       =                   
+Q_FYS3                       =                   
+BOTTOM_OFFST                 =                   
+BOTTOM_STIFF                 =                   
 $------------------------------------------------------------structural
 [STRUCTURAL]
+LONGITUDINAL_STIFFNESS       =                   
+LATERAL_STIFFNESS            =                   
+YAW_STIFFNESS                =                   
+FREQ_LONG                    =                   
+FREQ_LAT                     =                   
+FREQ_YAW                     =                   
+FREQ_WINDUP                  =                   
+DAMP_LONG                    =                   
+DAMP_LAT                     =                   
+DAMP_YAW                     =                   
+DAMP_WINDUP                  =                   
+DAMP_RESIDUAL                =                   
+DAMP_VLOW                    =                   
+Q_BVX                        =                   
+Q_BVT                        =                   
+PCFX1                        =                   
+PCFX2                        =                   
+PCFX3                        =                   
+PCFY1                        =                   
+PCFY2                        =                   
+PCFY3                        =                   
+PCMZ1                        =                   
 $---------------------------------------------------------contact patch
 [CONTACT_PATCH]
+Q_RA1                        =                   
+Q_RA2                        =                   
+Q_RB1                        =                   
+Q_RB2                        =                   
+ELLIPS_SHIFT                 =                   
+ELLIPS_LENGTH                =                   
+ELLIPS_HEIGHT                =                   
+ELLIPS_ORDER                 =                   
+ELLIPS_MAX_STEP              =                   
+ELLIPS_NWIDTH                =                   
+ELLIPS_NLENGTH               =                   
+ENV_C1                       =                   
+ENV_C2                       =                   
 $----------------------------------------------inflation pressure range
 [INFLATION_PRESSURE_RANGE]
+PRESMIN                      =                   
+PRESMAX                      =                   
 $--------------------------------------------------vertical force range
 [VERTICAL_FORCE_RANGE]
+FZMIN                        =                   
+FZMAX                        =                   
 $-------------------------------------------------------long slip range
 [LONG_SLIP_RANGE]
+KPUMIN                       =                   
+KPUMAX                       =                   
 $------------------------------------------------------slip angle range
 [SLIP_ANGLE_RANGE]
+ALPMIN                       =                   
+ALPMAX                       =                   
 $-----------------------------------------------inclination angle range
 [INCLINATION_ANGLE_RANGE]
+CAMMIN                       =                   
+CAMMAX                       =                   
 $--------------------------------------------------scaling coefficients
 [SCALING_COEFFICIENTS]
 LFZO                         = 1                 
@@ -114,33 +197,33 @@ QSX14                        = 0
 PPMX1                        = 0                 
 $--------------------------------------------------lateral coefficients
 [LATERAL_COEFFICIENTS]
-PCY1                         = 1.5               
-PDY1                         = 1.7107            
-PDY2                         = -0.5              
-PDY3                         = 3.6793            
-PEY1                         = -0.71061          
-PEY2                         = 1.6477            
-PEY3                         = -1.7047           
-PEY4                         = 56.9065           
-PEY5                         = 219.93            
-PKY1                         = -15.4241          
-PKY2                         = 1.2608            
-PKY3                         = -1                
+PCY1                         = 1.628             
+PDY1                         = 2.2183            
+PDY2                         = -0.1711           
+PDY3                         = 3.5294            
+PEY1                         = 0.20216           
+PEY2                         = -0.4914           
+PEY3                         = -0.065417         
+PEY4                         = -1.0289           
+PEY5                         = 215.6341          
+PKY1                         = -26.7176          
+PKY2                         = 1.449             
+PKY3                         = 0.55391           
 PKY4                         = 2                 
-PKY5                         = -45.8743          
-PKY6                         = -2.4877           
-PKY7                         = 3.9495            
-PHY1                         = 0.0025114         
-PHY2                         = 0.0096177         
-PVY1                         = 0.11194           
-PVY2                         = 0.28771           
-PVY3                         = -1.5431           
-PVY4                         = -4.7585           
-PPY1                         = 0.30693           
-PPY2                         = 1.1387            
-PPY3                         = -1.446            
-PPY4                         = -2                
-PPY5                         = -0.34657          
+PKY5                         = 15.3099           
+PKY6                         = -3.5332           
+PKY7                         = -1.5213           
+PHY1                         = 3.7437e-05        
+PHY2                         = -6.967e-05        
+PVY1                         = 0.034354          
+PVY2                         = -0.020412         
+PVY3                         = 0.57575           
+PVY4                         = 4.1362            
+PPY1                         = 0.36358           
+PPY2                         = 1.3921            
+PPY3                         = -0.22849          
+PPY4                         = -0.17753          
+PPY5                         = -0.098299         
 RBY1                         = 5                 
 RBY2                         = 2                 
 RBY3                         = 0.02              
@@ -168,33 +251,33 @@ QSY7                         = 0
 QSY8                         = 0                 
 $-------------------------------------------------aligning coefficients
 [ALIGNING_COEFFICIENTS]
-QBZ1                         = 0.07634           
-QBZ2                         = -0.11128          
-QBZ3                         = -0.08367          
-QBZ4                         = -2.7963           
-QBZ5                         = 3.0815            
-QBZ9                         = 12.1847           
-QBZ10                        = 0.84554           
-QCZ1                         = 69.4622           
-QDZ1                         = 0.097196          
-QDZ2                         = -0.031044         
-QDZ3                         = 24.4613           
-QDZ4                         = -281.7388         
-QDZ6                         = 0.017275          
-QDZ7                         = 0.018291          
-QDZ8                         = -1.2399           
-QDZ9                         = 2.5642            
-QDZ10                        = 9.5944            
-QDZ11                        = -1.1411           
-QEZ1                         = -0.39608          
-QEZ2                         = 11.7625           
-QEZ3                         = 11.5899           
-QEZ4                         = -0.24694          
-QEZ5                         = 2.919             
-QHZ1                         = 0.0028372         
-QHZ2                         = 0.013337          
-QHZ3                         = 0.1143            
-QHZ4                         = 0.467             
+QBZ1                         = 0.06517           
+QBZ2                         = -0.081197         
+QBZ3                         = 0.0028715         
+QBZ4                         = 4.605             
+QBZ5                         = 4.605             
+QBZ9                         = 9.3835            
+QBZ10                        = 0.60913           
+QCZ1                         = 40.8416           
+QDZ1                         = 0.098225          
+QDZ2                         = -0.060048         
+QDZ3                         = 6.4485            
+QDZ4                         = -20.6136          
+QDZ6                         = 0.015231          
+QDZ7                         = -0.034335         
+QDZ8                         = -2.0208           
+QDZ9                         = 3.326             
+QDZ10                        = -2.932            
+QDZ11                        = 22.4146           
+QEZ1                         = -1.367            
+QEZ2                         = -5.3346           
+QEZ3                         = -5.1504           
+QEZ4                         = 0.54054           
+QEZ5                         = -177.8878         
+QHZ1                         = -2.2294           
+QHZ2                         = -1.8392           
+QHZ3                         = 13.141            
+QHZ4                         = 15.69             
 PPZ1                         = 0                 
 PPZ2                         = 0                 
 SSZ1                         = 0                 

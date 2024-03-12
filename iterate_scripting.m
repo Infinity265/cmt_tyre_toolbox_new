@@ -10,8 +10,9 @@ graph_options = [0,0,0,0]
 %     ID = ID + 1;
 % end
 
-m = [2,6]
+m = [3,12]
 for i = 1:length(m)
     ID = m(i)
-    run_curvefit_2(ID)
+    make_graphs_4(ID, graph_options)
+    %run_curvefit_2(ID)
 end
