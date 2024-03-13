@@ -1,4 +1,4 @@
-function make_graphs_4(ID, graph_options)
+function make_outputs_4(ID, graph_options)
     % Returns tire selection parameters as determined by the script. Can
     % additionally plot grpahs
     %
@@ -19,11 +19,11 @@ function make_graphs_4(ID, graph_options)
     %   drive_no_2    : No. of first drivebrake test
     
     % Hardcode function input params
-    % ID = 6;
-    % graph_options = [0,0,0,0];
+    ID = 6;
+    graph_options = [0,0,0,0];
     
     % Read model
-    [tyre_model_name, a, b, c, drive_no_1] = read_tyre_from_metadata(ID);
+    [tyre_model_name, ~, ~, ~, drive_no_1] = read_tyre_from_metadata(ID);
     target_model = char(tyre_model_name);
     file = strcat(pwd, '\tyre_models\', target_model);
     tyre = MagicFormulaTyre(file);
@@ -37,9 +37,10 @@ function make_graphs_4(ID, graph_options)
 
     
     % Vehicle parameters
-    FZ_design = 240 * 9.8 * 0.25; %2024 Design Mass = 240kg
-    LLT = 100; %Currently estimated LLT
-    FZ_LLT = FZ_design - LLT;
+    FZstat = 240 * 9.8 * 0.25;          %2024 Design Mass = 240kg
+    LLT = 100;                          %Currently estimated LLT
+    DF = 300 / 4;                       %2024s downforce target at FY limit (skidpad)
+    FZLLTDF = FZstat - LLT + DF;
     
     % Graphing selection, 1 == plot, 0 == don't plot
     graphFYSA = graph_options(1);
@@ -47,13 +48,6 @@ function make_graphs_4(ID, graph_options)
     graphMZSA = graph_options(3); % Currently producing funny results
     graphFXSR = graph_options(4);
 
-    % 16 inch tyres dont have FXSR data, initialising data to reflect
-    % accordingly
-    FX_design_max = 'ND';
-    SR_at_FX_max = 'ND';
-    FX_max_with_LLT = 'ND';
-    SR_at_FX_max_with_LLT = 'ND';
-    
     % General form magic formula
     %[FX,FY,MZ,MY,MX] = magicformula(tyre, SR, SA, FZ);
     
@@ -61,28 +55,22 @@ function make_graphs_4(ID, graph_options)
     SA = linspace(deg2rad(-15), deg2rad(15));
     SA_deg = rad2deg(SA);
     SR = 0;
-    
-    [FX_ignore, FY_design, MZ_design] = magicformula(tyre, SR, SA,  FZ_design);    
-    FY_max = max(abs(FY_design));
-    i = find(FY_design == FY_max);
-    SA_at_FY_max = rad2deg(SA(i));
-    CS_design = -1 * (gradient(FY_design(:)) ./ gradient(SA(:)));
-    CS_design_max = max(abs(CS_design));
-    
-    [FX_ignore, FY_LLT, MZ_LLT] = magicformula(tyre, SR, SA, FZ_LLT);
-    FY_max_with_LLT = max(abs(FY_LLT));
-    i = find(FY_LLT == FY_max_with_LLT);
-    SA_at_FY_max_with_LLT = rad2deg(SA(i));
-    CS_LLT = -1 * (gradient(FY_LLT(:)) ./ gradient(SA(:)));
-    CS_LLT_max = max(abs(CS_LLT));
 
-    FY
+        % Solve models for FZ and MZ at slipt swept angles, additionally
+        % derive representative parameters of the tyres
+
+    [~, FY_FZstat, MZ_FZstat] = magicformula(tyre, SR, SA, FZstat);
+    [FY_max_FZstat, SA_at_FYmax_FZstat, CS_FZstat, CS_max_FZstat] = SA_deriv_params(FY_FZstat, SA);
+    
+    [~, FY_FZLLTDF, MZ_FZLLTDF] = magicformula(tyre, SR, SA, FZLLTDF);
+    [FY_max_FZLLTDF, SA_at_FYmax_FZLLTDF, CS_FZLLTDF, CS_max_FZLLTDF] = SA_deriv_params(FY_FZLLTDF, SA);
+
     
     % FYvsSA graphing
     if graphFYSA == 1   
         figure(); grid on; hold on
-        plot(SA_deg, FY_design, 'LineWidth', 2, 'DisplayName', num2str(FZ_design))
-        plot(SA_deg, FY_LLT, 'LineWidth', 2, 'DisplayName', num2str(FZ_LLT))
+        plot(SA_deg, FY_FZstat, 'LineWidth', 2, 'DisplayName', num2str(FZstat))
+        plot(SA_deg, FY_max_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLT))
         lgd = legend('Location', 'best'); xlabel('SA [deg]'); ylabel('FY [N]')
         lgd.Title.String = 'FZ'; lgd.Title.FontSize = 8;
     end
@@ -90,8 +78,8 @@ function make_graphs_4(ID, graph_options)
     % CSvsSA graphing
     if graphCSSA == 1
         figure(); grid on; hold on
-        plot(SA_deg, CS_design, 'LineWidth', 2, 'DisplayName', num2str(FZ_design))
-        plot(SA_deg, CS_LLT, 'LineWidth', 2, 'DisplayName', num2str(FZ_LLT))
+        plot(SA_deg, CS_FZstat, 'LineWidth', 2, 'DisplayName', num2str(FZstat))
+        plot(SA_deg, CS_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLT))
         lgd = legend('Location', 'best'); xlabel('SA [deg]'); ylabel('CS [dFY/dSA]')
         lgd.Title.String = 'FZ'; lgd.Title.FontSize = 8;
     end
@@ -99,33 +87,38 @@ function make_graphs_4(ID, graph_options)
     % MZvsSA graphing
     if graphMZSA == 1
         figure(); grid on; hold on
-        plot(SA_deg, MZ_design, 'LineWidth', 2, 'DisplayName', num2str(FZ_design))
-        plot(SA_deg, MZ_LLT, 'LineWidth', 2, 'DisplayName', num2str(FZ_LLT))
+        plot(SA_deg, MZ_FZstat, 'LineWidth', 2, 'DisplayName', num2str(FZstat))
+        plot(SA_deg, MZ_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLT))
         lgd = legend('Location', 'best'); xlabel('SA [deg]'); ylabel('MZ [Nm]')
         lgd.Title.String = 'FZ'; lgd.Title.FontSize = 8;
     end
+    
+
+    % Some tyres do not have testing data for FX if so allocate output
+    % variables as 'No data'
+    FX_max_FZstatic = 'ND';
+    SR_at_FXmax_FZstatic = 'ND';
+    FX_max_FZLLTDF  = 'ND';
+    SR_at_FXmax_FZLLTDF  = 'ND';
+    
     
     if has_FX == 1
         % SR calculations
         SR = linspace(deg2rad(-15), deg2rad(15));
         SA = 0;
         
-        [FX_design] = magicformula(tyre, SR, SA,  FZ_design);
-        FX_design_max = max(abs(FX_design));
-        i = find(FX_design_max == FX_design);
-        SR_at_FX_max = rad2deg(SR(i));
+        [FX_FZstatic] = magicformula(tyre, SR, SA,  FZstat);
+        [FX_max_FZstatic, SR_at_FXmax_FZstatic] = SR_deriv_params(FX_FZstatic, SR);
         
-        [FX_LLT] = magicformula(tyre, SR, SA,  FZ_LLT);
-        FX_max_with_LLT = max(abs(FX_LLT));
-        i = find(FX_max_with_LLT == FX_LLT);
-        SR_at_FX_max_with_LLT = rad2deg(SR(i));
+        [FX_FZLLTDF] = magicformula(tyre, SR, SA,  FZLLTDF);
+        [FX_max_FZLLTDF, SR_at_FXmax_FZLLTDF] = SR_deriv_params(FX_FZLLTDF, SR);
         
         % FXvsSA graphing
-        if graphFXSR == 1;
+        if graphFXSR == 1
             figure(); grid on; hold on
-            plot(SR, FX_design, 'LineWidth', 2, 'DisplayName', num2str(FZ_design))
-            plot(SR, FX_LLT, 'LineWidth', 2, 'DisplayName', num2str(FZ_LLT))
-            lgd = legend('Location', 'best'); xlabel('SX [-]'); ylabel('FX [N]');
+            plot(SR, FX_FZstatic, 'LineWidth', 2, 'DisplayName', num2str(FZstatic))
+            plot(SR, FX_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLTDF))
+            lgd = legend('Location', 'best'); xlabel('SR [-]'); ylabel('FX [N]');
             lgd.Title.String = 'FZ'; lgd.Title.FontSize = 8;
         end
     end
@@ -133,19 +126,18 @@ function make_graphs_4(ID, graph_options)
     % Compile tyre selection parameters
     outputs = {'ID', ID;
         'tyre', target_model;
-        'SA_at_FY_max', SA_at_FY_max
-        'FY_design_max', FY_max;
-        'SA_at_FY_max_with_LLT', SA_at_FY_max_with_LLT;
-        'FY_max_with_LLT', FY_max_with_LLT;
-        'CS_design_max', CS_design_max;
-        'CS_LLT_max', CS_LLT_max;
+        'SA_at_FYmax_FZstat', SA_at_FYmax_FZstat;
+        'FY_max_FZstat', FY_max_FZstat;
+        'SA_at_FYmax_FZLLTDF', SA_at_FYmax_FZLLTDF;
+        'FY_max_FZLLTDF', FY_max_FZLLTDF;
+        'CS_max_FZstat', CS_max_FZstat;
         'load_sensitive', 1;
         'MZ_max', 1;
         'SA_at_max_MZ', 1;
-        'FX_design_max', FX_design_max;
-        'SR_at_FX_max', SR_at_FX_max;
-        'FX_max_with_LLT', FX_max_with_LLT
-        'SR_at_FX_max_with_LLT', SR_at_FX_max_with_LLT;};
+        'FX_design_max', FX_max_FZstatic;
+        'SR_at_FX_max', SR_at_FXmax_FZstatic;
+        'FX_max_with_LLT', FX_max_FZLLTDF;
+        'SR_at_FX_max_with_LLT', SR_at_FXmax_FZLLTDF};
     
     % Format and save tyre selection parameters 
     tyre_selection_params = transpose(outputs);
