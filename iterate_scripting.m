@@ -4,9 +4,9 @@ graph_options = [0,0,0,0]
 % make_graphs_4(ID, graph_options)
 
 
-ID = 1
-while ID <= 27
-    make_graphs_4(ID, graph_options)
+ID =24
+while ID <=  27
+    make_outputs_4(ID, graph_options)
     ID = ID + 1;
 end
 

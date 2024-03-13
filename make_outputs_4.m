@@ -19,11 +19,11 @@ function make_outputs_4(ID, graph_options)
     %   drive_no_2    : No. of first drivebrake test
     
     % Hardcode function input params
-    ID = 6;
+    ID = 7;
     graph_options = [0,0,0,0];
     
     % Read model
-    [tyre_model_name, ~, ~, ~, drive_no_1] = read_tyre_from_metadata(ID);
+    [tyre_model_name, ~, ~, ~, drive_no_1, ~, unsprung_mass] = read_tyre_from_metadata(ID);
     target_model = char(tyre_model_name);
     file = strcat(pwd, '\tyre_models\', target_model);
     tyre = MagicFormulaTyre(file);
@@ -60,11 +60,11 @@ function make_outputs_4(ID, graph_options)
         % derive representative parameters of the tyres
 
     [~, FY_FZstat, MZ_FZstat] = magicformula(tyre, SR, SA, FZstat);
-    [FY_max_FZstat, SA_at_FYmax_FZstat, CS_FZstat, CS_max_FZstat] = SA_deriv_params(FY_FZstat, SA);
+    [FY_max_FZstat, SA_at_FYmax_FZstat, CS_FZstat, CS_max_FZstat, MZ_max_FZstat] = SA_deriv_params(FY_FZstat, MZ_FZstat, SA);
     
     [~, FY_FZLLTDF, MZ_FZLLTDF] = magicformula(tyre, SR, SA, FZLLTDF);
-    [FY_max_FZLLTDF, SA_at_FYmax_FZLLTDF, CS_FZLLTDF, CS_max_FZLLTDF] = SA_deriv_params(FY_FZLLTDF, SA);
-
+    [FY_max_FZLLTDF, SA_at_FYmax_FZLLTDF, CS_FZLLTDF, CS_max_FZLLTDF, MZ_max_FZLLTDF] = SA_deriv_params(FY_FZLLTDF, MZ_FZstat, SA);
+    
     
     % FYvsSA graphing
     if graphFYSA == 1   
@@ -126,14 +126,15 @@ function make_outputs_4(ID, graph_options)
     % Compile tyre selection parameters
     outputs = {'ID', ID;
         'tyre', target_model;
+        'unsprung_mass', unsprung_mass;
         'SA_at_FYmax_FZstat', SA_at_FYmax_FZstat;
         'FY_max_FZstat', FY_max_FZstat;
         'SA_at_FYmax_FZLLTDF', SA_at_FYmax_FZLLTDF;
         'FY_max_FZLLTDF', FY_max_FZLLTDF;
         'CS_max_FZstat', CS_max_FZstat;
         'load_sensitive', 1;
-        'MZ_max', 1;
-        'SA_at_max_MZ', 1;
+        'MZ_max_FZstat', MZ_max_FZstat;
+        'MZ_max_FZLLTDF', MZ_max_FZLLTDF
         'FX_design_max', FX_max_FZstatic;
         'SR_at_FX_max', SR_at_FXmax_FZstatic;
         'FX_max_with_LLT', FX_max_FZLLTDF;
