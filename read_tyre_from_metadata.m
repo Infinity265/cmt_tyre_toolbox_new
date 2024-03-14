@@ -1,4 +1,4 @@
-function [tyre_model_name, round, corner_no_1, corner_no_2, drive_no_1, drive_no_2, tyre_unloaded_radius] = read_tyre_from_metadata(ID)
+function [tyre_model_name, round, corner_no_1, corner_no_2, drive_no_1, drive_no_2, tyre_unloaded_radius, tyre_unsprung_mass] = read_tyre_from_metadata(ID)
     % Returns corresponding data files, unloaded radius and tyre name read
     % from a modelling_metadata xlsx file.
     %
@@ -36,6 +36,9 @@ function [tyre_model_name, round, corner_no_1, corner_no_2, drive_no_1, drive_no
    
     tyre_model_name = modelling_metadata(ID+1,10);
     tyre_unloaded_radius = tyre_OD * 0.0254 * 0.5; % D (in inches) * 0.0254 (convert in. to m) * 0.5 (determine rad from dia)
+    
+    tyre_unsprung_mass = modelling_metadata(ID+1,11);
+
 end
 
 
