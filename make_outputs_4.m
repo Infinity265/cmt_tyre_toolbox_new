@@ -19,8 +19,8 @@ function make_outputs_4(ID, graph_options)
     %   drive_no_2    : No. of first drivebrake test
     
     % Hardcode function input params
-    ID = 7;
-    graph_options = [0,0,0,0];
+    % ID = 7;
+    % graph_options = [0,0,0,0];
     
     % Read model
     [tyre_model_name, ~, ~, ~, drive_no_1, ~, ~, unsprung_mass] = read_tyre_from_metadata(ID);
