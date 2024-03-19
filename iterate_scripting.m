@@ -4,15 +4,15 @@ graph_options = [0,0,0,0]
 % make_graphs_4(ID, graph_options)
 
 
-ID =24
-while ID <=  27
-    make_outputs_4(ID, graph_options)
-    ID = ID + 1;
-end
-
-% m = [3,12]
-% for i = 1:length(m)
-%     ID = m(i)
-%     make_graphs_4(ID, graph_options)
-%     %run_curvefit_2(ID)
+% ID = 1
+% while ID <=  27
+%     make_outputs_4(ID, graph_options)
+%     ID = ID + 1;
 % end
+
+m = [21,23]
+for i = 1:length(m)
+    ID = m(i)
+    make_outputs_4(ID, graph_options)
+    %run_curvefit_2(ID)
+end

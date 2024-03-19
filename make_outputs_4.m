@@ -23,7 +23,7 @@ function make_outputs_4(ID, graph_options)
     graph_options = [1,1,1,1];
     
     % Read model
-    [tyre_model_name, ~, ~, ~, drive_no_1, ~, unsprung_mass] = read_tyre_from_metadata(ID);
+    [tyre_model_name, ~, ~, ~, drive_no_1, ~, ~, unsprung_mass] = read_tyre_from_metadata(ID);
     target_model = char(tyre_model_name);
     file = strcat(pwd, '\tyre_models\', target_model);
     tyre = MagicFormulaTyre(file);
@@ -135,10 +135,10 @@ function make_outputs_4(ID, graph_options)
         'load_sensitive', 1;
         'MZ_max_FZstat', MZ_max_FZstat;
         'MZ_max_FZLLTDF', MZ_max_FZLLTDF
-        'FX_design_max', FX_max_FZstatic;
-        'SR_at_FX_max', SR_at_FXmax_FZstatic;
-        'FX_max_with_LLT', FX_max_FZLLTDF;
-        'SR_at_FX_max_with_LLT', SR_at_FXmax_FZLLTDF};
+        'FX_max_FZstatic', FX_max_FZstatic;
+        'SR_at_FXmax_FZstatic', SR_at_FXmax_FZstatic;
+        'FX_max_FZLLTDF', FX_max_FZLLTDF;
+        'SR_at_FXmax_FZLLTDF', SR_at_FXmax_FZLLTDF};
     
     % Format and save tyre selection parameters 
     tyre_selection_params = transpose(outputs);
