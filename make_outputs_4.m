@@ -19,8 +19,8 @@ function make_outputs_4(ID, graph_options)
     %   drive_no_2    : No. of first drivebrake test
     
     % Hardcode function input params
-    ID = 7;
-    graph_options = [0,0,0,0];
+    ID = 8;
+    graph_options = [1,1,1,1];
     
     % Read model
     [tyre_model_name, ~, ~, ~, drive_no_1, ~, unsprung_mass] = read_tyre_from_metadata(ID);
@@ -70,7 +70,7 @@ function make_outputs_4(ID, graph_options)
     if graphFYSA == 1   
         figure(); grid on; hold on
         plot(SA_deg, FY_FZstat, 'LineWidth', 2, 'DisplayName', num2str(FZstat))
-        plot(SA_deg, FY_max_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLT))
+        plot(SA_deg, FY_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLTDF))
         lgd = legend('Location', 'best'); xlabel('SA [deg]'); ylabel('FY [N]')
         lgd.Title.String = 'FZ'; lgd.Title.FontSize = 8;
     end
@@ -79,7 +79,7 @@ function make_outputs_4(ID, graph_options)
     if graphCSSA == 1
         figure(); grid on; hold on
         plot(SA_deg, CS_FZstat, 'LineWidth', 2, 'DisplayName', num2str(FZstat))
-        plot(SA_deg, CS_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLT))
+        plot(SA_deg, CS_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLTDF))
         lgd = legend('Location', 'best'); xlabel('SA [deg]'); ylabel('CS [dFY/dSA]')
         lgd.Title.String = 'FZ'; lgd.Title.FontSize = 8;
     end
@@ -88,7 +88,7 @@ function make_outputs_4(ID, graph_options)
     if graphMZSA == 1
         figure(); grid on; hold on
         plot(SA_deg, MZ_FZstat, 'LineWidth', 2, 'DisplayName', num2str(FZstat))
-        plot(SA_deg, MZ_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLT))
+        plot(SA_deg, MZ_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLTDF))
         lgd = legend('Location', 'best'); xlabel('SA [deg]'); ylabel('MZ [Nm]')
         lgd.Title.String = 'FZ'; lgd.Title.FontSize = 8;
     end
@@ -116,7 +116,7 @@ function make_outputs_4(ID, graph_options)
         % FXvsSA graphing
         if graphFXSR == 1
             figure(); grid on; hold on
-            plot(SR, FX_FZstatic, 'LineWidth', 2, 'DisplayName', num2str(FZstatic))
+            plot(SR, FX_FZstatic, 'LineWidth', 2, 'DisplayName', num2str(FZstat))
             plot(SR, FX_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLTDF))
             lgd = legend('Location', 'best'); xlabel('SR [-]'); ylabel('FX [N]');
             lgd.Title.String = 'FZ'; lgd.Title.FontSize = 8;
