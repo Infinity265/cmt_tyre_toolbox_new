@@ -8,7 +8,7 @@ function run_curvefit_2(ID)
     %   tyre_model  : Saves .tir model with appropriate name
 
 % Select tyre for analysis
-%ID = 5             %internal_tyre_ID used in excel file
+ID = 29             %internal_tyre_ID used in excel file
 
 % Options  1 == yes, 0 == no
 fit_model = 1; %Can turn off model fitting for trouble shooting 
@@ -42,6 +42,13 @@ elseif round == 7
     else
         measurementsCornering = round_7_parser(data_folder, 'Cornering', corner_no_1, corner_no_2);
         measurementsDriveBrake = round_7_parser(data_folder, 'DriveBrake', drive_no_1, drive_no_2);
+    end
+elseif round == 99
+    if drive_no_1 == 'ND';
+        measurementsCornering = round_99_parser(data_folder, 'Cornering', corner_no_1, corner_no_2);
+    else
+        measurementsCornering = round_99_parser(data_folder, 'Cornering', corner_no_1, corner_no_2);
+        measurementsDriveBrake = round_99_parser(data_folder, 'DriveBrake', drive_no_1, drive_no_2);
     end
 end
 
