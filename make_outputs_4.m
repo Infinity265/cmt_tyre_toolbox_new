@@ -1,4 +1,4 @@
-function make_outputs_4(ID, graph_options)
+function make_outputs_4(ID, graph_options, write_xlsx)
     % Returns tire selection parameters as determined by the script. Can
     % additionally plot grpahs
     %
@@ -10,6 +10,7 @@ function make_outputs_4(ID, graph_options)
     %                       graphMZS,
     %                       graphFXSR]
     %                     1 == plot, 0 == no plot
+    %   write_xlsx      : Write output file parameters to excel file 
     %         
     %
     % Output:
@@ -19,8 +20,9 @@ function make_outputs_4(ID, graph_options)
     %   drive_no_2    : No. of first drivebrake test
     
     % Hardcode function input params
-    ID = 8;
+    ID = 5;
     graph_options = [1,1,1,1];
+    write_xlsx = 0
     
     % Read model
     [tyre_model_name, ~, ~, ~, drive_no_1, ~, ~, unsprung_mass] = read_tyre_from_metadata(ID);
@@ -40,7 +42,7 @@ function make_outputs_4(ID, graph_options)
     FZstat = 240 * 9.8 * 0.25;          %2024 Design Mass = 240kg
     LLT = 100;                          %Currently estimated LLT
     DF = 300 / 4;                       %2024s downforce target at FY limit (skidpad)
-    FZLLTDF = FZstat - LLT + DF;
+    FZLLTDF = FZst- LLT + DF;
     
     % Graphing selection, 1 == plot, 0 == don't plot
     graphFYSA = graph_options(1);
@@ -143,10 +145,13 @@ function make_outputs_4(ID, graph_options)
     % Format and save tyre selection parameters 
     tyre_selection_params = transpose(outputs);
     t = tyre_selection_params(2, :);
-    filename = strcat(pwd, '/model_outputs/tyre_ranking.xlsx');   
+    filename = strcat(pwd, '/model_outputs/tyre_ranking.xlsx'); 
+    
     
     % Determine location to write
-    start_cell = strcat('A', string(ID+1))
-    writecell(t, filename,'Sheet',1,'Range', start_cell)
+    if write_xlsx == 1
+        start_cell = strcat('A', string(ID+1))
+        writecell(t, filename,'Sheet',1,'Range', start_cell)
+    end
 
 end
