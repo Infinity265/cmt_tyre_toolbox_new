@@ -20,9 +20,9 @@ function make_outputs_4(ID, graph_options, write_xlsx)
     %   drive_no_2    : No. of first drivebrake test
     
     % Hardcode function input params
-    ID = 5;
+    ID = 29;
     graph_options = [1,1,1,1];
-    write_xlsx = 0
+    write_xlsx = 1;
     
     % Read model
     [tyre_model_name, ~, ~, ~, drive_no_1, ~, ~, unsprung_mass] = read_tyre_from_metadata(ID);
@@ -31,7 +31,7 @@ function make_outputs_4(ID, graph_options, write_xlsx)
     tyre = MagicFormulaTyre(file);
     
     % Do not read curve if FX data missing
-    if drive_no_1 == 'ND';
+    if drive_no_1 == 'ND'
         has_FX = 0;
     else
         has_FX = 1;
@@ -42,7 +42,7 @@ function make_outputs_4(ID, graph_options, write_xlsx)
     FZstat = 240 * 9.8 * 0.25;          %2024 Design Mass = 240kg
     LLT = 100;                          %Currently estimated LLT
     DF = 300 / 4;                       %2024s downforce target at FY limit (skidpad)
-    FZLLTDF = FZst- LLT + DF;
+    FZLLTDF = FZstat - LLT + DF;
     
     % Graphing selection, 1 == plot, 0 == don't plot
     graphFYSA = graph_options(1);
@@ -72,7 +72,7 @@ function make_outputs_4(ID, graph_options, write_xlsx)
     if graphFYSA == 1   
         figure(); grid on; hold on
         plot(SA_deg, FY_FZstat, 'LineWidth', 2, 'DisplayName', num2str(FZstat))
-        plot(SA_deg, FY_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLTDF))
+        %plot(SA_deg, FY_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLTDF))
         lgd = legend('Location', 'best'); xlabel('SA [deg]'); ylabel('FY [N]')
         lgd.Title.String = 'FZ'; lgd.Title.FontSize = 8;
     end
@@ -81,7 +81,7 @@ function make_outputs_4(ID, graph_options, write_xlsx)
     if graphCSSA == 1
         figure(); grid on; hold on
         plot(SA_deg, CS_FZstat, 'LineWidth', 2, 'DisplayName', num2str(FZstat))
-        plot(SA_deg, CS_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLTDF))
+        %plot(SA_deg, CS_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLTDF))
         lgd = legend('Location', 'best'); xlabel('SA [deg]'); ylabel('CS [dFY/dSA]')
         lgd.Title.String = 'FZ'; lgd.Title.FontSize = 8;
     end
@@ -90,7 +90,7 @@ function make_outputs_4(ID, graph_options, write_xlsx)
     if graphMZSA == 1
         figure(); grid on; hold on
         plot(SA_deg, MZ_FZstat, 'LineWidth', 2, 'DisplayName', num2str(FZstat))
-        plot(SA_deg, MZ_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLTDF))
+        %plot(SA_deg, MZ_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLTDF))
         lgd = legend('Location', 'best'); xlabel('SA [deg]'); ylabel('MZ [Nm]')
         lgd.Title.String = 'FZ'; lgd.Title.FontSize = 8;
     end
@@ -119,7 +119,7 @@ function make_outputs_4(ID, graph_options, write_xlsx)
         if graphFXSR == 1
             figure(); grid on; hold on
             plot(SR, FX_FZstatic, 'LineWidth', 2, 'DisplayName', num2str(FZstat))
-            plot(SR, FX_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLTDF))
+            %plot(SR, FX_FZLLTDF, 'LineWidth', 2, 'DisplayName', num2str(FZLLTDF))
             lgd = legend('Location', 'best'); xlabel('SR [-]'); ylabel('FX [N]');
             lgd.Title.String = 'FZ'; lgd.Title.FontSize = 8;
         end
