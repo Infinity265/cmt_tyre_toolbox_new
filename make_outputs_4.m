@@ -39,7 +39,7 @@ function make_outputs_4(ID, graph_options, write_xlsx)
 
     
     % Vehicle parameters
-    FZstat = 240 * 9.8 * 0.25;          %2024 Design Mass = 240kg
+    FZstat = ((240+75) * 9.8 + 300)* 0.25;          %2024 Design Mass = 240kg
     LLT = 100;                          %Currently estimated LLT
     DF = 300 / 4;                       %2024s downforce target at FY limit (skidpad)
     FZLLTDF = FZstat - LLT + DF;
